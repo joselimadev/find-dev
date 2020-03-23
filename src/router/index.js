@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Find from '../views/Find.vue';
+import Dev from '../views/Dev.vue';
 
 Vue.use(VueRouter);
 
@@ -12,7 +13,13 @@ const routes = [
   },
   {
     path: '/find',
+    name: 'Find',
     component: Find,
+  },
+  {
+    path: '/find/:userName',
+    name: 'Dev',
+    component: Dev,
   },
 ];
 
