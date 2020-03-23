@@ -1,28 +1,30 @@
 <template>
   <div class="container d-flex">
     <div class="search-form align-items-center">
-      <form>
-        <div class="text-center mb-4">
-          <img class="mb-4" src="../assets/logo1.svg" alt width="150px" />
-          <h1 class="h3 mb-3 font-weight-normal">Find Dev</h1>
-          <span>
-            Digite o nome de usuário do <a href="https://www.github.com">GitHub</a> de um
-            desenvolvedor para visualizar o perfil e seus repositórios.
-          </span>
-        </div>
-        <div class="form-label-group">
-          <input
-            type="text"
-            id="username"
-            class="form-control"
-            placeholder="Username"
-            required
-            autofocus
-          />
-          <label for="username">Username</label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Find</button>
-      </form>
+      <div class="text-center mb-4">
+        <img class="mb-4" src="../assets/logo1.svg" alt width="150px" />
+        <h1 class="h3 mb-3 font-weight-normal">Find Dev</h1>
+        <span>
+          Digite o nome de usuário do
+          <a href="https://www.github.com" target="_blank">GitHub</a> de um desenvolvedor para
+          visualizar o perfil e seus repositórios.
+        </span>
+      </div>
+      <div class="form-label-group">
+        <input
+          v-model="username"
+          type="text"
+          id="username"
+          class="form-control"
+          placeholder="Username"
+          required
+          autofocus
+        />
+        <label for="username">Username</label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" v-on:click="getUser(username)">
+        <i class="fa fa-search"></i>
+      </button>
     </div>
   </div>
 </template>
@@ -30,6 +32,16 @@
 <script>
 export default {
   name: 'Find',
+  data() {
+    return {
+      username: '',
+    };
+  },
+  methods: {
+    getUser(username) {
+      console.log(username);
+    },
+  },
 };
 </script>
 
