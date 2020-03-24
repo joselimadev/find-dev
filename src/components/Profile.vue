@@ -2,13 +2,7 @@
   <div class="card mb-3">
     <div class="row no-gutters">
       <div class="col-lg-12 col-md-12 col-4">
-        <img
-          :src="profile.avatar_url"
-          class="img-fluid avatar mx-auto d-block p-3"
-          alt=""
-          sizes=""
-          srcset=""
-        />
+        <img :src="profile.avatar_url" class="img-fluid avatar mx-auto d-block p-3" />
       </div>
       <div class="col-lg-12 col-md-12 col-8">
         <div class="card-body">
@@ -19,11 +13,11 @@
           <p class="card-text">
             {{ profile.bio }}
           </p>
-          <p class="card-text">
+          <p class="card-text" v-if="profile.public_repos">
             <span class="badge badge-pill badge-primary">{{ profile.public_repos }}</span>
             Repositories
           </p>
-          <p class="card-text">
+          <p class="card-text" v-if="profile.location">
             <i class="fa fa-map-marker text-primary"></i> {{ profile.location }}
           </p>
         </div>
