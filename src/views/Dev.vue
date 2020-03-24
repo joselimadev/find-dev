@@ -3,7 +3,7 @@
     <div class="container d-flex" v-if="loading">
       <div class="img-box align-items-center">
         <div class="text-center mb-4">
-          <img class="mb-2" src="../assets/splash_loading.svg" alt width="700px" />
+          <img class="mb-2 img-fluid" src="../assets/splash_loading.svg" alt width="700px" />
           <h4 class="h4 mb-3 font-weight-normal">Loading....</h4>
         </div>
       </div>
@@ -22,7 +22,7 @@
     <div class="container d-flex" v-if="not_found">
       <div class="img-box-not-found align-items-center mt-4">
         <div class="text-center mb-4">
-          <img class="mb-2" src="../assets/splash_notfound.svg" alt width="700px" />
+          <img class="mb-2 img-fluid" src="../assets/splash_notfound.svg" alt width="700px" />
           <h4 class="h4 mb-3 font-weight-normal">
             Não encontramos o Dev que você procurava. Sorry!
           </h4>

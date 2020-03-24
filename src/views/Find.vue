@@ -24,7 +24,7 @@
           autofocus
         />
         <div class="invalid-feedback text-center" v-if="not_found">
-          Please choose a valid username.
+          Não encontramos o Dev que você procurava. Sorry!
         </div>
         <label for="username">Username</label>
       </div>
