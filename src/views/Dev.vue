@@ -3,7 +3,11 @@
     <div
       class="container-xl px-3 mt-4 mb-4 clearfix d-flex justify-content-between align-items-center"
     >
-      <div v-on:click="close()"><i class="fa fa-arrow-left btn-back"></i></div>
+      <router-link to="/find">
+        <div>
+          <i class="fa fa-arrow-left btn-back"></i>
+        </div>
+      </router-link>
       <h1 class="h3 font-weight-normal">Find Dev</h1>
     </div>
     <div class="container-xl px-3 mt-4 clearfix">
@@ -13,7 +17,7 @@
         </div>
         <div class="col-lg-9 col-md-8 col-12 pl-md-2">
           <div class="row">
-            <template v-for="repository in repositories">
+            <template v-for="repository in list">
               <Repository v-bind:repository="repository" v-bind:key="repository.id" />
             </template>
           </div>
@@ -27,68 +31,65 @@
 import Profile from '@/components/Profile.vue';
 import Repository from '@/components/Repository.vue';
 
+import _ from 'lodash';
+
+import { getUser, getRepos } from '@/services/users';
+
 export default {
   name: 'Dev',
+  props: ['username'],
   components: {
     Profile,
     Repository,
   },
   data() {
     return {
-      profile: {
-        login: 'jcolscript',
-        id: 30646629,
-        avatar_url: 'https://avatars0.githubusercontent.com/u/30646629?v=4',
-        html_url: 'https://github.com/jcolscript',
-        name: 'José Lima',
-        location: 'São Paulo - SP',
-        bio:
-          "I believe that technologies come and go, so I'm really passionate about learning new frameworks, languages ​​and paradigms.",
-        public_repos: 29,
+      profile: {},
+      repositories: [],
+      configs: {
+        orderBy: 'stargazers_count',
+        order: 'desc',
       },
-      repositories: [
-        {
-          id: 232349065,
-          name: 'adonis-1',
-          html_url: 'https://github.com/jcolscript/adonis-bull',
-          description: 'The easiest way to start using an asynchronous job queue with AdonisJS ⚡️',
-          updated_at: '2020-01-07T15:02:41Z',
-          stargazers_count: 5,
-          language: 'CSS',
-        },
-        {
-          id: 232349066,
-          name: 'adonis-2',
-          html_url: 'https://github.com/jcolscript/adonis-bull',
-          description: 'The easiest way to start using an asynchronous job queue with AdonisJS ⚡️',
-          updated_at: '2020-01-07T15:02:41Z',
-          stargazers_count: 2,
-          language: 'JAVASCRIPT',
-        },
-        {
-          id: 232349067,
-          name: 'adonis-3',
-          html_url: 'https://github.com/jcolscript/adonis-bull',
-          description: 'The easiest way to start using an asynchronous job queue with AdonisJS ⚡️',
-          updated_at: '2020-01-07T15:02:41Z',
-          stargazers_count: 1,
-          language: 'COBOL',
-        },
-        {
-          id: 232349068,
-          name: 'adonis-4',
-          html_url: 'https://github.com/jcolscript/adonis-bull',
-          description: 'The easiest way to start using an asynchronous job queue with AdonisJS ⚡️',
-          updated_at: '2020-01-07T15:02:41Z',
-          stargazers_count: 3,
-          language: 'ACTION',
-        },
-      ],
     };
   },
   methods: {
-    close() {
-      return this.$router.push({ name: 'Find' });
+    fetchUser(username) {
+      getUser(username)
+        .then((response) => response.data)
+        .then((user) => {
+          // set é usado por estamos sobrescrevendo um objeto, e ele pode perder a "reatividade"
+          this.profile = user;
+        })
+        .then(() => {
+          // this.loading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    fetchRepos(username) {
+      getRepos(username)
+        .then((response) => response.data)
+        .then((repos) => {
+          this.repositories = repos;
+        })
+        .then(() => {
+          // this.loading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  created() {
+    Promise.all([this.fetchUser(this.username), this.fetchRepos(this.username)]).then(() => {
+      console.log('pronto');
+    });
+  },
+  computed: {
+    list() {
+      return _.orderBy(this.repositories, this.configs.orderBy, this.configs.order);
     },
   },
 };
