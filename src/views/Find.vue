@@ -14,6 +14,8 @@
         <input
           v-model="username"
           v-on:keyup.enter="fetchUser(username)"
+          v-on:keyup="not_found = false"
+          v-bind:class="{ 'is-invalid': not_found }"
           type="text"
           id="username"
           class="form-control"
@@ -21,6 +23,9 @@
           required
           autofocus
         />
+        <div class="invalid-feedback text-center" v-if="not_found">
+          Please choose a valid username.
+        </div>
         <label for="username">Username</label>
       </div>
       <button
@@ -43,6 +48,7 @@ export default {
     return {
       username: '',
       loading: false,
+      not_found: false,
     };
   },
   methods: {
@@ -59,6 +65,8 @@ export default {
           this.loading = false;
         })
         .catch((err) => {
+          this.not_found = true;
+          this.loading = false;
           console.log(err);
         });
     },
