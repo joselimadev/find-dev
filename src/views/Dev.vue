@@ -1,7 +1,16 @@
 <template>
   <div class="main">
+    <div class="container d-flex" v-if="loading">
+      <div class="img-box align-items-center">
+        <div class="text-center mb-4">
+          <img class="mb-2" src="../assets/splash_loading.svg" alt width="700px" />
+          <h4 class="h4 mb-3 font-weight-normal">Loading....</h4>
+        </div>
+      </div>
+    </div>
     <div
       class="container-xl px-3 mt-4 mb-4 clearfix d-flex justify-content-between align-items-center"
+      v-if="!loading"
     >
       <router-link to="/find">
         <div>
@@ -10,7 +19,17 @@
       </router-link>
       <h1 class="h3 font-weight-normal">Find Dev</h1>
     </div>
-    <div class="container-xl px-3 mt-4 clearfix">
+    <div class="container d-flex" v-if="not_found">
+      <div class="img-box-not-found align-items-center mt-4">
+        <div class="text-center mb-4">
+          <img class="mb-2" src="../assets/splash_notfound.svg" alt width="700px" />
+          <h4 class="h4 mb-3 font-weight-normal">
+            Não encontramos o Dev que você procurava. Sorry!
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="container-xl px-3 mt-4 clearfix" v-if="!loading && !not_found">
       <div class="row">
         <div class="col-lg-3 col-md-4 col-12 pr-md-3 pr-xl-6">
           <Profile v-bind:profile="profile" />
@@ -46,6 +65,8 @@ export default {
     return {
       profile: {},
       repositories: [],
+      loading: true,
+      not_found: false,
       configs: {
         orderBy: 'stargazers_count',
         order: 'desc',
@@ -54,38 +75,33 @@ export default {
   },
   methods: {
     fetchUser(username) {
-      getUser(username)
+      return getUser(username)
         .then((response) => response.data)
         .then((user) => {
           // set é usado por estamos sobrescrevendo um objeto, e ele pode perder a "reatividade"
           this.profile = user;
-        })
-        .then(() => {
-          // this.loading = false;
-        })
-        .catch((err) => {
-          console.log(err);
         });
     },
 
     fetchRepos(username) {
-      getRepos(username)
+      return getRepos(username)
         .then((response) => response.data)
         .then((repos) => {
           this.repositories = repos;
-        })
-        .then(() => {
-          // this.loading = false;
-        })
-        .catch((err) => {
-          console.log(err);
         });
     },
   },
   created() {
-    Promise.all([this.fetchUser(this.username), this.fetchRepos(this.username)]).then(() => {
-      console.log('pronto');
-    });
+    this.loading = true;
+    Promise.all([this.fetchUser(this.username), this.fetchRepos(this.username)])
+      .then(() => {
+        this.loading = false;
+      })
+      .catch((err) => {
+        this.loading = false;
+        this.not_found = true;
+        console.log(err);
+      });
   },
   computed: {
     list() {
@@ -103,5 +119,23 @@ export default {
 }
 .btn-back:hover {
   color: #0069d9;
+}
+.container,
+.main {
+  height: 100%;
+}
+.img-box {
+  width: 100%;
+  max-width: 800px;
+  padding: 15px;
+  margin: auto;
+}
+
+.img-box-not-found {
+  width: 100%;
+  max-width: 800px;
+  padding: 15px;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
