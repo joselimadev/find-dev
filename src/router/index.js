@@ -20,6 +20,7 @@ const routes = [
     path: '/find/:username',
     name: 'Dev',
     component: Dev,
+    props: true,
   },
 ];
 
