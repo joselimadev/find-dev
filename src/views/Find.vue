@@ -22,24 +22,49 @@
         />
         <label for="username">Username</label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" v-on:click="getUser(username)">
-        <i class="fa fa-search"></i>
+      <button
+        class="btn btn-lg btn-primary btn-block"
+        v-on:click="fetchUser(username)"
+        :disabled="loading || !isValid"
+      >
+        <i class="fa fa-search" v-if="!loading"></i> <span v-else>Loading...</span>
       </button>
     </div>
   </div>
 </template>
 
 <script>
+import { getUser } from '@/services/users';
+
 export default {
   name: 'Find',
   data() {
     return {
       username: '',
+      loading: false,
     };
   },
   methods: {
-    getUser(username) {
-      console.log(username);
+    fetchUser(username) {
+      this.loading = true;
+      getUser(username)
+        .then((response) => response.data)
+        .then((user) => {
+          this.$router.push({
+            path: `/find/${user.login}`,
+          });
+        })
+        .then(() => {
+          this.loading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  computed: {
+    isValid() {
+      return this.username !== '';
     },
   },
 };
