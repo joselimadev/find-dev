@@ -13,6 +13,7 @@
       <div class="form-label-group">
         <input
           v-model="username"
+          v-on:keyup.enter="fetchUser(username)"
           type="text"
           id="username"
           class="form-control"
