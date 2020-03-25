@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Find from '../views/Find.vue';
-import Dev from '../views/Dev.vue';
+import Find from '@/views/Find.vue';
 
 Vue.use(VueRouter);
 
@@ -19,12 +18,13 @@ const routes = [
   {
     path: '/find/:username',
     name: 'Dev',
-    component: Dev,
+    component: () => import(/* webpackChunkName: "about" */ '@/views/Dev.vue'),
     props: true,
   },
 ];
 
 const router = new VueRouter({
+  mode: 'history',
   routes,
 });
 
