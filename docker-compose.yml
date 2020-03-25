@@ -1,8 +1,8 @@
 version: '3.7'
 
 services:
-  find-dev:
-    container_name: jcolscript/find-dev
+  jcolscript:
+    container_name: find-dev
     build:
       context: .
       dockerfile: Dockerfile
