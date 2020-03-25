@@ -5,7 +5,6 @@ const client = axios.create({
   timeout: 1000,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: 'token a9444c9b85772c527076763f376f8682acbe3259',
   },
 });
 
