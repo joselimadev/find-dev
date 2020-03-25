@@ -64,10 +64,9 @@ export default {
         .then(() => {
           this.loading = false;
         })
-        .catch((err) => {
+        .catch(() => {
           this.not_found = true;
           this.loading = false;
-          console.log(err);
         });
     },
   },
