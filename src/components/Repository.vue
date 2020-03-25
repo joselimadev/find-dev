@@ -4,7 +4,9 @@
       <div class="card-body">
         <h5 class="card-title">
           <i class="fa fa-book text-primary"></i>
-          &nbsp;<a :href="repository.html_url" target="_blank">{{ repository.name }}</a>
+          &nbsp;<a class="name" :href="repository.html_url" target="_blank">{{
+            repository.name
+          }}</a>
         </h5>
         <p class="card-text">
           {{ repository.description }}
@@ -16,7 +18,8 @@
           {{ repository.language }}
         </span>
         <span class="text-right">
-          <i class="fa fa-star text-primary"></i> {{ repository.stargazers_count }}
+          <i class="fa fa-star text-primary"></i>
+          <span class="stars">{{ repository.stargazers_count }}</span>
         </span>
       </div>
     </div>

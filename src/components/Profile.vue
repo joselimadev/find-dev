@@ -6,11 +6,11 @@
       </div>
       <div class="col-lg-12 col-md-12 col-8">
         <div class="card-body">
-          <h5 class="card-title">{{ profile.name }}</h5>
+          <h5 class="card-title name">{{ profile.name }}</h5>
           <h6 class="card-subtitle">
-            <a :href="profile.html_url" target="_blank">{{ profile.login }}</a>
+            <a class="login" :href="profile.html_url" target="_blank">{{ profile.login }}</a>
           </h6>
-          <p class="card-text">
+          <p class="card-text bio">
             {{ profile.bio }}
           </p>
           <p class="card-text" v-if="profile.public_repos">
