@@ -47,12 +47,11 @@
 </template>
 
 <script>
+import _ from 'lodash';
+import { mapState, mapActions } from 'vuex';
+
 import Profile from '@/components/Profile.vue';
 import Repository from '@/components/Repository.vue';
-
-import _ from 'lodash';
-
-import { getUser, getRepos } from '@/services/users';
 
 export default {
   name: 'Dev',
@@ -63,8 +62,6 @@ export default {
   },
   data() {
     return {
-      profile: {},
-      repositories: [],
       loading: true,
       not_found: false,
       configs: {
@@ -74,26 +71,14 @@ export default {
     };
   },
   methods: {
-    fetchUser(username) {
-      return getUser(username)
-        .then((response) => response.data)
-        .then((user) => {
-          // set é usado por estamos sobrescrevendo um objeto, e ele pode perder a "reatividade"
-          this.profile = user;
-        });
-    },
-
-    fetchRepos(username) {
-      return getRepos(username)
-        .then((response) => response.data)
-        .then((repos) => {
-          this.repositories = repos;
-        });
-    },
+    ...mapActions(['getUser', 'getRepos']),
   },
   created() {
     this.loading = true;
-    Promise.all([this.fetchUser(this.username), this.fetchRepos(this.username)])
+    Promise.all([
+      this.$store.dispatch('getUser', this.username),
+      this.$store.dispatch('getRepos', this.username),
+    ])
       .then(() => {
         this.loading = false;
       })
@@ -104,6 +89,7 @@ export default {
       });
   },
   computed: {
+    ...mapState(['profile', 'repositories']),
     list() {
       return _.orderBy(this.repositories, this.configs.orderBy, this.configs.order);
     },
