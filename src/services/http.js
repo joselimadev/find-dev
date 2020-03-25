@@ -5,7 +5,7 @@ const client = axios.create({
   timeout: 1000,
   headers: {
     'Content-Type': 'application/json',
+    Authorization: `${process.env.VUE_APP_GIT_TOKEN ? process.env.VUE_APP_GIT_TOKEN : ''}`,
   },
 });
-
 export default client;
