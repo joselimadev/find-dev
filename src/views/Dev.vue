@@ -40,6 +40,7 @@
               <Repository v-bind:repository="repository" v-bind:key="repository.id" />
             </template>
           </div>
+          <Pagination :page="current_page" :repos="profile.public_repos" @navigate="navigate" />
         </div>
       </div>
     </div>
@@ -52,6 +53,7 @@ import { mapState, mapActions } from 'vuex';
 
 import Profile from '@/components/Profile.vue';
 import Repository from '@/components/Repository.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default {
   name: 'Dev',
@@ -59,11 +61,13 @@ export default {
   components: {
     Profile,
     Repository,
+    Pagination,
   },
   data() {
     return {
       loading: true,
       not_found: false,
+      current_page: 1,
       configs: {
         orderBy: 'stargazers_count',
         order: 'desc',
@@ -72,12 +76,25 @@ export default {
   },
   methods: {
     ...mapActions(['getUser', 'getRepos']),
+    navigate(page) {
+      this.loading = true;
+      this.$store
+        .dispatch('getRepos', { username: this.username, page })
+        .then(() => {
+          this.loading = false;
+          this.current_page = page;
+        })
+        .catch(() => {
+          this.loading = false;
+          this.not_found = true;
+        });
+    },
   },
   created() {
     this.loading = true;
     Promise.all([
       this.$store.dispatch('getUser', this.username),
-      this.$store.dispatch('getRepos', this.username),
+      this.$store.dispatch('getRepos', { username: this.username, page: this.current_page }),
     ])
       .then(() => {
         this.loading = false;
