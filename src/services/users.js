@@ -2,4 +2,5 @@ import Http from './http'; // não precisa de .js
 
 export const getUser = (username) => Http.get(`/${username}`);
 
-export const getRepos = (username) => Http.get(`/${username}/repos`);
+// eslint-disable-next-line prettier/prettier
+export const getRepos = (username, page = 1) => Http.get(`/${username}/repos?page=${page}&per_page=15`);
