@@ -10,7 +10,7 @@ Find Dev
 
 <div>
   <p align="center">
-    <img style="text-align:center" src="https://i.ibb.co/qNHCkFk/web.gif" alt="demo-web" width="800">
+    <img src="https://i.imgur.com/3zTpkYa.gif" alt="demo-web" width="800">
   <p align="center">
 </div>
 
