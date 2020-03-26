@@ -27,9 +27,9 @@ export default new Vuex.Store({
           context.commit('addProfile', user);
         });
     },
-    getRepos(context, param) {
+    getRepos(context, { username, page }) {
       context.commit('addRepos', []);
-      return getRepos(param)
+      return getRepos(username, page)
         .then((response) => response.data)
         .then((repos) => {
           context.commit('addRepos', repos);
