@@ -9,7 +9,7 @@ Find Dev
 <p align="center">Application to search for a github user by username, if found, return your repositories.</p>
 
 <div>
-  <img src="https://ibb.co/bzg9gXK/find-dev-cap.gif" alt="demo-web" height="425">
+  <img src="https://i.ibb.co/4PZrZpV/find-dev-cap.gif" alt="demo-web" height="425">
 </div>
 
 <hr />
