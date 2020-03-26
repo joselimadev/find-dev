@@ -1,35 +1,15 @@
-# FIND DEV
+<h1 align="center">
+<br>
+  <img src="https://svgshare.com/s/JTF" alt="Find Dev" width="120">
+<br>
+<br>
+Find Dev
+</h1>
 
-## Project setup
+<p align="center">Application to search for a github user by username, if found, return your repositories.</p>
 
-```
-npm install
-```
+<div>
+  <img src="https://ibb.co/bzg9gXK" alt="demo-web" height="425">
+</div>
 
-### Compiles and hot-reloads for development
-
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Run your unit tests
-
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<hr />
