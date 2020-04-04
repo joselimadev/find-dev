@@ -41,8 +41,8 @@ export default {
   },
   computed: {
     pages() {
-      if (Math.round(this.repos / 15) + 1 < 30) {
-        return range(1, Math.round(this.repos / 15) + 1);
+      if (Math.ceil(this.repos / 15) + 1 < 30) {
+        return range(1, Math.ceil(this.repos / 15) + 1);
       }
       return range(1, 31);
     },
