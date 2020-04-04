@@ -42,7 +42,6 @@ export default {
   computed: {
     pages() {
       if (Math.ceil(this.repos / 15) + 1 < 30) {
-        console.log(range(1, Math.ceil(this.repos / 15) + 1));
         return range(1, Math.ceil(this.repos / 15) + 1);
       }
       return range(1, 31);
