@@ -40,7 +40,12 @@
               <Repository v-bind:repository="repository" v-bind:key="repository.id" />
             </template>
           </div>
-          <Pagination :page="current_page" :repos="profile.public_repos" @navigate="navigate" />
+          <Pagination
+            :page="current_page"
+            :repos="profile.public_repos"
+            @navigate="navigate"
+            v-if="profile.public_repos"
+          />
         </div>
       </div>
     </div>
