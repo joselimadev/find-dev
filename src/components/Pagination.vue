@@ -16,7 +16,7 @@
         >
           <a class="page-link pg" @click="navigate($event, pg)" href="#">{{ pg }}</a>
         </li>
-        <li class="page-item" :class="{ disabled: page === Math.round(this.repos / 15) }">
+        <li class="page-item" :class="{ disabled: page === Math.ceil(this.repos / 15) }">
           <a class="page-link" href="#" @click="navigate($event, page + 1)" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
             <span class="sr-only">Next</span>
