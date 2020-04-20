@@ -54,7 +54,7 @@ describe('Dev.vue', () => {
 
   test('correct properties are showing up in the component state', () => {
     const { wrapper } = build();
-    const expected = ['loading', 'not_found', 'current_page', 'configs', 'profile', 'repositories'];
+    const expected = ['loading', 'not_found', 'current_page', 'profile', 'repositories'];
     const received = Object.keys({ ...wrapper.vm.$data, ...wrapper.vm.$store.state });
     expect(received).toEqual(expected);
   });
