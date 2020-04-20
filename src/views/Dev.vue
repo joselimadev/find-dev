@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import _ from 'lodash';
 import { mapState, mapActions } from 'vuex';
 
 import Profile from '@/components/Profile.vue';
@@ -73,10 +72,6 @@ export default {
       loading: true,
       not_found: false,
       current_page: 1,
-      configs: {
-        orderBy: 'stargazers_count',
-        order: 'desc',
-      },
     };
   },
   methods: {
@@ -112,7 +107,7 @@ export default {
   computed: {
     ...mapState(['profile', 'repositories']),
     list() {
-      return _.orderBy(this.repositories, this.configs.orderBy, this.configs.order);
+      return this.repositories;
     },
   },
 };
