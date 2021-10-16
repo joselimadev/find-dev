@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-3">
+  <div class="card-sticky card mb-3">
     <div class="row no-gutters">
       <div class="col-lg-12 col-md-12 col-4">
         <img :src="profile.avatar_url" class="img-fluid avatar mx-auto d-block p-3" />
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card {
+.card-sticky {
   position: sticky;
   top: 8px;
 }
