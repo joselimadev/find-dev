@@ -36,6 +36,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card {
+  position: sticky;
+  top: 8px;
+}
+
 .avatar {
   border-radius: 100%;
 }
